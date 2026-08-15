@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InstagramIcon from "@/components/InstagramIcon";
+import InstagramIcon from "@/components/InstagramIcon";	
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = { title: "Contact" };
@@ -18,7 +18,7 @@ export default function ContactPage() {
         rel="noopener noreferrer"
         className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-700 hover:underline"
       >
-        <Instagram className="h-4 w-4" /> @Roles_for_you_
+        <InstagramIcon className="h-4 w-4" /> @Roles_for_you_
       </a>
 
       <div className="mt-8">
