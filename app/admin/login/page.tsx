@@ -1,11 +1,11 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { loginAction } from "@/lib/actions/auth";
+import { loginAction, type LoginState } from "@/lib/actions/auth";
 import Logo from "@/components/Logo";
 
 export default function AdminLoginPage() {
-  const [state, formAction] = useFormState(loginAction, {});
+  const [state, formAction] = useFormState<LoginState, FormData>(loginAction, {});
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-hero-gradient px-4">
