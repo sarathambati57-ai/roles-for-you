@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InstagramIcon from "./InstagramIcon";
+import InstagramIcon from "@/components/InstagramIcon";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = { title: "Contact" };
