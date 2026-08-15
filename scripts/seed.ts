@@ -29,9 +29,7 @@ if (!url || !serviceKey || !email || !password) {
 }
 
 async function main() {
-  const supabase = createClient(url as string, serviceKey as string, {
-    auth: { autoConfirm: true },
-  });
+  const supabase = createClient(url as string, serviceKey as string);
 
   const { data, error } = await supabase.auth.admin.createUser({
     email,
