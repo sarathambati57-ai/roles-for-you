@@ -11,6 +11,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    serverComponentsExternalPackages: ["isomorphic-dompurify"],
+  },
 };
 
 module.exports = nextConfig;
