@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 import { createClient } from "@/lib/supabase/server";
 import { makeSlug } from "@/lib/utils";
 
@@ -35,6 +35,13 @@ export type JobFormState = {
   error?: string;
   fieldErrors?: Record<string, string>;
 };
+
+function sanitizeDescription(html: string) {
+  return sanitizeHtml(html, {
+    allowedTags: ["p", "br", "strong", "em", "u", "h1", "h2", "h3", "ul", "ol", "li", "a"],
+    allowedAttributes: { a: ["href", "target", "rel"] },
+  });
+}
 
 function parseFormData(formData: FormData) {
   const skills = String(formData.get("skills") || "")
@@ -81,7 +88,7 @@ export async function createJobAction(
   }
 
   const supabase = createClient();
-  const cleanDescription = DOMPurify.sanitize(parsed.data.description);
+  const cleanDescription = sanitizeDescription(parsed.data.description);
   const slug = makeSlug(parsed.data.job_title, parsed.data.company_name, Date.now().toString(36));
 
   const { data, error } = await supabase
@@ -121,7 +128,7 @@ export async function updateJobAction(
   }
 
   const supabase = createClient();
-  const cleanDescription = DOMPurify.sanitize(parsed.data.description);
+  const cleanDescription = sanitizeDescription(parsed.data.description);
 
   const { error } = await supabase
     .from("jobs")
